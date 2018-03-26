@@ -8,14 +8,15 @@
 class VertexArray
 {
 public:
-	VertexArray(GLushort *data, GLsizei n, GLuint count);
+	VertexArray();
 	~VertexArray();
 
-	void addBuffer(Buffer *bufer, GLuint index);
-
+	void addBuffer(Buffer *buffer, GLuint index);
+	void bind() const;
+	void unbind() const;
 private:
 	GLuint m_id;
-	std::vector <Buffer *> m_buffers;
+	std::vector<Buffer *> m_buffers;
 };
 
 

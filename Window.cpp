@@ -52,6 +52,12 @@ void Window::clear() const
  */
 void Window::update()
 {
+	GLenum errnum = glGetError();
+	if (errnum != GL_NO_ERROR)
+	{
+		printf("OpenGL Error: %d\n", errnum);
+	}
+
 	glfwPollEvents();
 	glfwSwapBuffers(m_window);
 }
@@ -63,6 +69,12 @@ void Window::update()
 bool Window::should_close() const
 {
 	return (glfwWindowShouldClose(m_window) == 1);
+}
+
+void Window::get_mouse_position(double &x, double &y) const
+{
+	x = m_mx;
+	y = m_my;
 }
 
 /**
@@ -111,6 +123,8 @@ bool Window::init()
 
 	glClearColor(0.4f, 0.4f, 0.4f, 1.0f);
 
+	glGetError(); // Force clear errors
+
 	return true;
 }
 
@@ -128,12 +142,6 @@ bool Window::is_mouse_button_pressed(unsigned int btn) const
 	if (btn >= MAX_BUTTONS)
 		return false;
 	return (m_mouse_btns[btn]);
-}
-
-void Window::get_mouse_position(double &x, double &y) const
-{
-	x = m_mx;
-	y = m_my;
 }
 
 /**

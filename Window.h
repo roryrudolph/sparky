@@ -17,14 +17,14 @@ public:
 	void update();
 	bool should_close() const;
 
-	inline int getWidth() const { return m_width; }
-	inline int getHeight() const { return m_height; }
+	inline int get_width() const { return m_width; }
+	inline int get_height() const { return m_height; }
+	void get_mouse_position(double &x, double &y) const;
 
 private:
 	bool init();
 	bool is_key_pressed(unsigned int key) const;
 	bool is_mouse_button_pressed(unsigned int btn) const;
-	void get_mouse_position(double &x, double &y) const;
 
 	GLFWwindow *m_window;
 	const char *m_title;

@@ -6,7 +6,7 @@
 class IndexBuffer
 {
 public:
-	IndexBuffer(GLushort *data, GLsizei n, GLuint count);
+	IndexBuffer(GLushort *data, GLsizei num_elements);
 	~IndexBuffer();
 
 	void bind() const;
