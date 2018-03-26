@@ -11,6 +11,12 @@ struct cb
 	static void key(GLFWwindow *window, int key, int scancode, int action, int mods);
 };
 
+/**
+ * Constructor
+ * @param title The window title
+ * @param width The window width
+ * @param height The window height
+ */
 Window::Window(const char *title, int width, int height)
 {
 	m_title = title;
@@ -24,6 +30,9 @@ Window::Window(const char *title, int width, int height)
 	memset(m_mouse_btns, false, MAX_BUTTONS * sizeof(*m_mouse_btns));
 }
 
+/**
+ * Destructor
+ */
 Window::~Window()
 {
 	glfwDestroyWindow(m_window);
@@ -56,6 +65,10 @@ bool Window::should_close() const
 	return (glfwWindowShouldClose(m_window) == 1);
 }
 
+/**
+ * Initialize the window
+ * @return Returns true on success, else false
+ */
 bool Window::init()
 {
 	if (! glfwInit())
@@ -63,6 +76,12 @@ bool Window::init()
 		printf("Could not initialize GLFW\n");
 		return false;
 	}
+
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
+	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	//glfwWindowHint(GLFW_VISIBLE, 0);
 
 	m_window = glfwCreateWindow(m_width, m_height, m_title, NULL, NULL);
 	if (! m_window)
