@@ -3,6 +3,7 @@
 #include "Buffer.h"
 #include "IndexBuffer.h"
 #include "VertexArray.h"
+#include "Simple2DRenderer.h"
 #include <stdio.h>
 #include <GL/glew.h>
 #include <glm/glm.hpp>
@@ -19,45 +20,6 @@ int main(void)
 	int height = 540;
 	Window window("Sparky", width, height);
 
-	GLfloat vertices[] =
-	{
-		0, 0, 0,
-		0, 3, 0,
-		8, 3, 0,
-		8, 0, 0,
-	};
-
-	GLushort indices[] =
-	{
-		0, 1, 2,
-		2, 3, 0,
-	};
-
-	GLfloat colorsA[] =
-	{
-		1.0f, 0.0f, 1.0f, 1.0f,
-		1.0f, 0.0f, 1.0f, 1.0f,
-		1.0f, 0.0f, 1.0f, 1.0f,
-		1.0f, 0.0f, 1.0f, 1.0f,
-	};
-
-	GLfloat colorsB[] =
-	{
-		0.2f, 0.3f, 0.8f, 1.0f,
-		0.2f, 0.3f, 0.8f, 1.0f,
-		0.2f, 0.3f, 0.8f, 1.0f,
-		0.2f, 0.3f, 0.8f, 1.0f,
-	};
-
-	VertexArray sprite1, sprite2;
-	IndexBuffer ibo(indices, 6);
-
-	sprite1.addBuffer(new Buffer(vertices, 4*3, 3), 0);
-	sprite1.addBuffer(new Buffer(colorsA, 4*4, 4), 1);
-
-	sprite2.addBuffer(new Buffer(vertices, 4*3, 3), 0);
-	sprite2.addBuffer(new Buffer(colorsB, 4*4, 4), 1);
-
 	Shader shader("vs.glsl", "fs.glsl");
 	shader.enable();
 
@@ -66,6 +28,21 @@ int main(void)
 	shader.setUniformMat4("vpmat", glm::ortho(0.0f, 16.0f, 0.0f, 9.0f, -1.0f, 1.0f));
 
 	shader.setUniform2f("flit", glm::vec2(4.0f, 1.5f));
+
+	Renderable2D sprite1(
+		glm::vec3(5.0f, 5.0f, 0.0f),
+		glm::vec2(4.0f, 4.0f),
+		glm::vec4(1.0f, 0.0f, 1.0f, 1.0f),
+		&shader
+	);
+	Renderable2D sprite2(
+		glm::vec3(7.0f, 1.0f, 0.0f),
+		glm::vec2(2.0f, 3.0f),
+		glm::vec4(0.2f, 0.0f, 1.0f, 1.0f),
+		&shader
+	);
+
+	Simple2DRenderer renderer;
 
 	while (! window.should_close())
 	{
@@ -77,19 +54,10 @@ int main(void)
 		float flit_y = (float)(9.0f - y * 9.0f / (float)height);
 		shader.setUniform2f("flit", glm::vec2(flit_x, flit_y));
 
-		sprite1.bind();
-		ibo.bind();
-		shader.setUniformMat4("vmmat", glm::translate(glm::vec3(4, 3, 0)));
-		glDrawElements(GL_TRIANGLES, ibo.get_count(), GL_UNSIGNED_SHORT, 0);
-		ibo.unbind();
-		sprite1.unbind();
+		renderer.submit(&sprite1);
+		renderer.submit(&sprite2);
 
-		sprite2.bind();
-		ibo.bind();
-		shader.setUniformMat4("vmmat", glm::translate(glm::vec3(0, 0, 0)));
-		glDrawElements(GL_TRIANGLES, ibo.get_count(), GL_UNSIGNED_SHORT, 0);
-		ibo.unbind();
-		sprite2.unbind();
+		renderer.flush();
 
 		window.update();
 	}

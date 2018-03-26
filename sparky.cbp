@@ -104,10 +104,22 @@
 		<Unit filename="/home/rory/Projects/sparky/IndexBuffer.h">
 			<Option target="sparky"/>
 		</Unit>
+		<Unit filename="/home/rory/Projects/sparky/Renderable2D.h">
+			<Option target="sparky"/>
+		</Unit>
+		<Unit filename="/home/rory/Projects/sparky/Renderer2D.h">
+			<Option target="sparky"/>
+		</Unit>
 		<Unit filename="/home/rory/Projects/sparky/Shader.cpp">
 			<Option target="sparky"/>
 		</Unit>
 		<Unit filename="/home/rory/Projects/sparky/Shader.h">
+			<Option target="sparky"/>
+		</Unit>
+		<Unit filename="/home/rory/Projects/sparky/Simple2DRenderer.cpp">
+			<Option target="sparky"/>
+		</Unit>
+		<Unit filename="/home/rory/Projects/sparky/Simple2DRenderer.h">
 			<Option target="sparky"/>
 		</Unit>
 		<Unit filename="/home/rory/Projects/sparky/VertexArray.cpp">
