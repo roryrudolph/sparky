@@ -15,8 +15,8 @@ public:
 	void bind() const;
 	void unbind() const;
 
-	inline const GLsizei get_width() const { return m_width; }
-	inline const GLsizei get_height() const { return m_height; }
+	inline GLsizei get_width() const { return m_width; }
+	inline GLsizei get_height() const { return m_height; }
 
 private:
 	GLuint load();

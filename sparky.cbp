@@ -104,10 +104,28 @@
 		<Unit filename="/home/rory/Projects/sparky/FileUtils.h">
 			<Option target="sparky"/>
 		</Unit>
+		<Unit filename="/home/rory/Projects/sparky/Group.cpp">
+			<Option target="sparky"/>
+		</Unit>
+		<Unit filename="/home/rory/Projects/sparky/Group.h">
+			<Option target="sparky"/>
+		</Unit>
+		<Unit filename="/home/rory/Projects/sparky/ImageLoader.cpp">
+			<Option target="sparky"/>
+		</Unit>
+		<Unit filename="/home/rory/Projects/sparky/ImageLoader.h">
+			<Option target="sparky"/>
+		</Unit>
 		<Unit filename="/home/rory/Projects/sparky/IndexBuffer.cpp">
 			<Option target="sparky"/>
 		</Unit>
 		<Unit filename="/home/rory/Projects/sparky/IndexBuffer.h">
+			<Option target="sparky"/>
+		</Unit>
+		<Unit filename="/home/rory/Projects/sparky/Layer.cpp">
+			<Option target="sparky"/>
+		</Unit>
+		<Unit filename="/home/rory/Projects/sparky/Layer.h">
 			<Option target="sparky"/>
 		</Unit>
 		<Unit filename="/home/rory/Projects/sparky/Renderable2D.h">
@@ -140,6 +158,18 @@
 		<Unit filename="/home/rory/Projects/sparky/StaticSprite.h">
 			<Option target="sparky"/>
 		</Unit>
+		<Unit filename="/home/rory/Projects/sparky/Texture.cpp">
+			<Option target="sparky"/>
+		</Unit>
+		<Unit filename="/home/rory/Projects/sparky/Texture.h">
+			<Option target="sparky"/>
+		</Unit>
+		<Unit filename="/home/rory/Projects/sparky/TileLayer.cpp">
+			<Option target="sparky"/>
+		</Unit>
+		<Unit filename="/home/rory/Projects/sparky/TileLayer.h">
+			<Option target="sparky"/>
+		</Unit>
 		<Unit filename="/home/rory/Projects/sparky/Timer.h">
 			<Option target="sparky"/>
 		</Unit>
@@ -162,6 +192,9 @@
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 		<Unit filename="/home/rory/Projects/sparky/cmake-modules/FindGLFW3.cmake">
+			<Option virtualFolder="CMake Files\cmake-modules\"/>
+		</Unit>
+		<Unit filename="/home/rory/Projects/sparky/cmake-modules/FindFreeImage.cmake">
 			<Option virtualFolder="CMake Files\cmake-modules\"/>
 		</Unit>
 	</Project>
