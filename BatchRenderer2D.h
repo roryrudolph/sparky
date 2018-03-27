@@ -3,6 +3,7 @@
 
 #include "Renderer2D.h"
 #include "IndexBuffer.h"
+#include <cstddef>
 
 #define RENDERER_MAX_SPRITES   10000
 #define RENDERER_VERTEX_SIZE   (sizeof(VertexData))

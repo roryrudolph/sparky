@@ -4,8 +4,7 @@
 #include "Sprite.h"
 #include "StaticSprite.h"
 #include "BatchRenderer2D.h"
-#include <stdio.h>
-#include <time.h>
+#include "Timer.h"
 
 #define BATCH_RENDERER  1
 
@@ -22,8 +21,6 @@ int main(void)
 	Shader shader("shaders/vs.glsl", "shaders/fs.glsl");
 	shader.enable();
 
-	//shader.setUniformMat4("vmmat", glm::mat4());
-	//shader.setUniformMat4("vvmat", glm::mat4());
 	shader.setUniformMat4("vpmat", glm::ortho(0.0f, 16.0f, 0.0f, 9.0f, -1.0f, 1.0f));
 
 	shader.setUniform2f("flit", glm::vec2(4.0f, 1.5f));
@@ -32,16 +29,12 @@ int main(void)
 	std::vector<Renderable2D*> sprites;
 
 #if (BATCH_RENDERER == 1)
-	//Sprite sprite1(glm::vec3(5.0f, 5.0f, 0.0f), glm::vec2(4.0f, 4.0f), glm::vec4(1.0f, 0.0f, 1.0f, 1.0f));
-	//Sprite sprite2(glm::vec3(7.0f, 1.0f, 0.0f), glm::vec2(2.0f, 3.0f), glm::vec4(0.2f, 0.0f, 1.0f, 1.0f));
 	BatchRenderer2D renderer;
 
-	for (float y = 0; y < 9.0f; y += 0.1)
-		for (float x = 0; x < 16.0f; x += 0.1)
-			sprites.push_back(new Sprite(glm::vec3(x, y, 0), glm::vec2(0.04f, 0.04f), glm::vec4(rand() % 1000 / 1000.0f, 0, 1, 1)));
+	for (float y = 0; y < 9.0f; y += 1.0f)
+		for (float x = 0; x < 16.0f; x += 1.0f)
+			sprites.push_back(new Sprite(glm::vec3(x, y, 0), glm::vec2(0.9f, 0.9f), glm::vec4(rand() % 1000 / 1000.0f, 0, 1, 1)));
 #else
-	//StaticSprite sprite1(glm::vec3(5.0f, 5.0f, 0.0f), glm::vec2(4.0f, 4.0f), glm::vec4(1.0f, 0.0f, 1.0f, 1.0f), shader);
-	//StaticSprite sprite2(glm::vec3(7.0f, 1.0f, 0.0f), glm::vec2(2.0f, 3.0f), glm::vec4(0.2f, 0.0f, 1.0f, 1.0f), shader);
 	SimpleRenderer2D renderer;
 
 	for (float y = 0; y < 9.0f; y += 0.1)

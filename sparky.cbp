@@ -140,6 +140,9 @@
 		<Unit filename="/home/rory/Projects/sparky/StaticSprite.h">
 			<Option target="sparky"/>
 		</Unit>
+		<Unit filename="/home/rory/Projects/sparky/Timer.h">
+			<Option target="sparky"/>
+		</Unit>
 		<Unit filename="/home/rory/Projects/sparky/VertexArray.cpp">
 			<Option target="sparky"/>
 		</Unit>

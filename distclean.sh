@@ -1,6 +1,6 @@
 #!/bin/bash
 
-rm -rvf \
+rm -rf \
 	cmake-build-debug/ \
 	cmake_install.cmake \
 	CMakeFiles/ \

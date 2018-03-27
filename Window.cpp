@@ -55,7 +55,33 @@ void Window::update()
 	GLenum errnum = glGetError();
 	if (errnum != GL_NO_ERROR)
 	{
-		printf("OpenGL Error: %d\n", errnum);
+		printf("ERROR: OpenGL %d: ", errnum);
+		switch (errnum)
+		{
+			case GL_INVALID_ENUM:
+				printf("Invalid enum\n");
+				break;
+			case GL_INVALID_VALUE:
+				printf("Invalid value\n");
+				break;
+			case GL_INVALID_OPERATION:
+				printf("Invalid operation\n");
+				break;
+			case GL_INVALID_FRAMEBUFFER_OPERATION:
+				printf("Invalid framebuffer operation\n");
+				break;
+			case GL_OUT_OF_MEMORY:
+				printf("Out of memory\n");
+				break;
+			case GL_STACK_UNDERFLOW:
+				printf("Stack underflow\n");
+				break;
+			case GL_STACK_OVERFLOW:
+				printf("Stack overflow\n");
+				break;
+			default:
+				printf("\n");
+		}
 	}
 
 	glfwPollEvents();

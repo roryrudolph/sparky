@@ -75,7 +75,7 @@ void BatchRenderer2D::init()
 	glEnableVertexAttribArray(SHADER_VERTEX_INDEX);
 	glEnableVertexAttribArray(SHADER_COLOR_INDEX);
 	glVertexAttribPointer(SHADER_VERTEX_INDEX, 3, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (void *)0);
-	glVertexAttribPointer(SHADER_COLOR_INDEX, 4, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (void *)(3*sizeof(GLfloat)));
+	glVertexAttribPointer(SHADER_COLOR_INDEX, 4, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (void *)(offsetof(VertexData, VertexData::color)));
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
