@@ -2,6 +2,7 @@
 #define BATCHRENDERER2D_H_
 
 #include "Renderer2D.h"
+#include "Renderable2D.h"
 #include "IndexBuffer.h"
 #include <cstddef>
 

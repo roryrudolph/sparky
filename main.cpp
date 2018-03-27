@@ -6,6 +6,7 @@
 #include "BatchRenderer2D.h"
 #include "Timer.h"
 #include "TileLayer.h"
+#include "Group.h"
 
 #define BATCH_RENDERER  1
 
@@ -19,15 +20,35 @@ int main(void)
 	int height = 540;
 	Window window("Sparky", width, height);
 
-	Shader *shader = new Shader("../shaders/vs.glsl", "../shaders/fs.glsl");
-	shader->setUniform2f("flit", glm::vec2(4.0f, 1.5f));
+	Shader *shader1 = new Shader("../shaders/vs.glsl", "../shaders/fs.glsl");
+	Shader *shader2 = new Shader("../shaders/vs.glsl", "../shaders/fs.glsl");
+	shader1->setUniform2f("flit", glm::vec2(4.0f, 1.5f));
+	shader2->setUniform2f("flit", glm::vec2(4.0f, 1.5f));
 
 	srand(time(NULL));
 
-	TileLayer layer(shader);
-	for (float y = -9.0f; y < 9.0f; y += 1.0f)
-		for (float x = -16.0f; x < 16.0f; x += 1.0f)
-			layer.add(new Sprite(glm::vec3(x, y, 0.0f), glm::vec2(0.9f, 0.9f), glm::vec4(rand() % 1000 / 1000.0f, 0.0f, 1.0f, 1.0f)));
+	TileLayer layer1(shader1);
+
+//	for (float y = -9.0f; y < 9.0f; y += 1.0f)
+//		for (float x = -16.0f; x < 16.0f; x += 1.0f)
+//			layer1.add(new Sprite(glm::vec3(x, y, 0.0f),
+//								  glm::vec2(0.9f, 0.9f),
+//								  glm::vec4(rand() % 1000 / 1000.0f, 0.0f, 1.0f, 1.0f)));
+
+	Group *group1 = new Group(glm::translate(glm::vec3(-15.0f, 5.0f, 0.0f)));
+	group1->add(new Sprite(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec2(6.0f, 3.0f), glm::vec4(1.0f, 1.0f, 1.0f, 1.0f)));
+
+	Group *button = new Group(glm::translate(glm::vec3(0.5f, 0.5f, 0.0f)));
+	button->add(new Sprite(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec2(5.0f, 2.0f), glm::vec4(1.0f, 0.0f, 1.0f, 1.0f)));
+	button->add(new Sprite(glm::vec3(0.5f, 0.5f, 0.0f), glm::vec2(3.0f, 1.0f), glm::vec4(0.2f, 0.3f, 0.8f, 1.0f)));
+	group1->add(button);
+
+	layer1.add(group1);
+
+	TileLayer layer2(shader2);
+	layer2.add(new Sprite(glm::vec3(4.0f, 1.0f, 0.0f),
+						  glm::vec2(5.0f, 5.0f),
+						  glm::vec4(0.0f, 1.0f, 0.0f, 1.0f)));
 
 	while (! window.should_close())
 	{
@@ -37,12 +58,20 @@ int main(void)
 		window.get_mouse_position(x, y);
 		float flit_x = (float)(x * 32.0f / (float)width - 16.0f);
 		float flit_y = (float)(9.0f - y * 18.0f / (float)height);
-		shader->setUniform2f("flit", glm::vec2(flit_x, flit_y));
 
-		layer.render();
+		shader1->enable();
+		shader1->setUniform2f("flit", glm::vec2(flit_x, flit_y));
+		//shader1->setUniform2f("flit", glm::vec2(-8.0f, -3.0f));
+
+		shader2->enable();
+
+		layer1.render();
+		//layer2.render();
 
 		window.update();
 	}
 
+	//delete shader1;
+	//delete shader2;
 	return (0);
 }

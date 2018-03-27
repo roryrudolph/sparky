@@ -1,6 +1,5 @@
 #include "BatchRenderer2D.h"
 
-
 BatchRenderer2D::BatchRenderer2D()
 {
 	init();
@@ -37,19 +36,19 @@ void BatchRenderer2D::submit(const Renderable2D *renderable)
 	int a = col.a * 255.0f;
 	unsigned int c = a << 24 | b << 16 | g << 8 | r;
 
-	m_buf->vertex = pos;
+	m_buf->vertex = *m_transformation_back * glm::vec4(pos, 1.0);
 	m_buf->color = c;
 	m_buf++;
 
-	m_buf->vertex = glm::vec3(pos.x, pos.y + siz.y, pos.z);
+	m_buf->vertex = *m_transformation_back * glm::vec4(pos.x, pos.y + siz.y, pos.z, 1.0f);
 	m_buf->color = c;
 	m_buf++;
 
-	m_buf->vertex = glm::vec3(pos.x + siz.x, pos.y + siz.y, pos.z);
+	m_buf->vertex = *m_transformation_back * glm::vec4(pos.x + siz.x, pos.y + siz.y, pos.z, 1.0f);
 	m_buf->color = c;
 	m_buf++;
 
-	m_buf->vertex = glm::vec3(pos.x + siz.x, pos.y, pos.z);
+	m_buf->vertex = *m_transformation_back * glm::vec4(pos.x + siz.x, pos.y, pos.z, 1.0f);
 	m_buf->color = c;
 	m_buf++;
 

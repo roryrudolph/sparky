@@ -1,4 +1,5 @@
 #include "SimpleRenderer2D.h"
+#include "Renderable2D.h"
 
 void SimpleRenderer2D::submit(const Renderable2D *renderable)
 {

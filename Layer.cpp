@@ -27,7 +27,7 @@ void Layer::render()
 
 	m_renderer->begin();
 	for (const Renderable2D *o : m_objects)
-		m_renderer->submit(o);
+			o->submit(m_renderer);
 	m_renderer->end();
 
 	m_renderer->flush();
