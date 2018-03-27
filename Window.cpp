@@ -55,7 +55,7 @@ void Window::update()
 	GLenum errnum = glGetError();
 	if (errnum != GL_NO_ERROR)
 	{
-		printf("ERROR: OpenGL %d: ", errnum);
+		printf("ERROR: %s: OpenGL %d: ", __func__, errnum);
 		switch (errnum)
 		{
 			case GL_INVALID_ENUM:
@@ -111,7 +111,7 @@ bool Window::init()
 {
 	if (! glfwInit())
 	{
-		printf("Could not initialize GLFW\n");
+		printf("ERROR: %s: Could not initialize GLFW\n", __func__);
 		return false;
 	}
 
@@ -125,7 +125,7 @@ bool Window::init()
 	if (! m_window)
 	{
 		glfwTerminate();
-		printf("Could not create GLFW window\n");
+		printf("ERROR: %s: Could not create GLFW window\n", __func__);
 		return false;
 	}
 
@@ -141,7 +141,7 @@ bool Window::init()
 	glewExperimental = GL_TRUE;
 	if (glewInit() != GLEW_OK)
 	{
-		printf("Could not initialize GLEW\n");
+		printf("ERROR: %s: Could not initialize GLEW\n", __func__);
 		return false;
 	}
 
