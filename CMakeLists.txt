@@ -21,7 +21,7 @@ find_package (GLFW3 REQUIRED)
 include_directories(${GLFW3_INCLUDE_DIRS})
 link_libraries(${GLFW3_LIBRARIES})
 
-add_executable (${PROJECT_NAME} ${SOURCES} Window.cpp Window.h Shader.cpp Shader.h FileUtils.cpp FileUtils.h Buffer.cpp Buffer.h IndexBuffer.cpp IndexBuffer.h VertexArray.cpp VertexArray.h Renderable2D.h Simple2DRenderer.cpp Simple2DRenderer.h Renderer2D.h)
+add_executable (${PROJECT_NAME} ${SOURCES} Window.cpp Window.h Shader.cpp Shader.h FileUtils.cpp FileUtils.h Buffer.cpp Buffer.h IndexBuffer.cpp IndexBuffer.h VertexArray.cpp VertexArray.h Renderable2D.h SimpleRenderer2D.cpp SimpleRenderer2D.h Renderer2D.h BatchRenderer2D.cpp BatchRenderer2D.h Sprite.cpp Sprite.h StaticSprite.cpp StaticSprite.h)
 
 target_link_libraries (${PROJECT_NAME}
     ${GLEW_LIBRARIES}

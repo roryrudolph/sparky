@@ -86,6 +86,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/rory/Projects/sparky/BatchRenderer2D.cpp">
+			<Option target="sparky"/>
+		</Unit>
+		<Unit filename="/home/rory/Projects/sparky/BatchRenderer2D.h">
+			<Option target="sparky"/>
+		</Unit>
 		<Unit filename="/home/rory/Projects/sparky/Buffer.cpp">
 			<Option target="sparky"/>
 		</Unit>
@@ -116,10 +122,22 @@
 		<Unit filename="/home/rory/Projects/sparky/Shader.h">
 			<Option target="sparky"/>
 		</Unit>
-		<Unit filename="/home/rory/Projects/sparky/Simple2DRenderer.cpp">
+		<Unit filename="/home/rory/Projects/sparky/SimpleRenderer2D.cpp">
 			<Option target="sparky"/>
 		</Unit>
-		<Unit filename="/home/rory/Projects/sparky/Simple2DRenderer.h">
+		<Unit filename="/home/rory/Projects/sparky/SimpleRenderer2D.h">
+			<Option target="sparky"/>
+		</Unit>
+		<Unit filename="/home/rory/Projects/sparky/Sprite.cpp">
+			<Option target="sparky"/>
+		</Unit>
+		<Unit filename="/home/rory/Projects/sparky/Sprite.h">
+			<Option target="sparky"/>
+		</Unit>
+		<Unit filename="/home/rory/Projects/sparky/StaticSprite.cpp">
+			<Option target="sparky"/>
+		</Unit>
+		<Unit filename="/home/rory/Projects/sparky/StaticSprite.h">
 			<Option target="sparky"/>
 		</Unit>
 		<Unit filename="/home/rory/Projects/sparky/VertexArray.cpp">

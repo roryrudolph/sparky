@@ -121,7 +121,7 @@ bool Window::init()
 
 	printf("OpenGL Version: %s\n", glGetString(GL_VERSION));
 
-	glClearColor(0.4f, 0.4f, 0.4f, 1.0f);
+	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
 	glGetError(); // Force clear errors
 

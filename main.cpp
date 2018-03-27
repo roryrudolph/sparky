@@ -1,14 +1,13 @@
 #include "Window.h"
 #include "Shader.h"
-#include "Buffer.h"
-#include "IndexBuffer.h"
-#include "VertexArray.h"
-#include "Simple2DRenderer.h"
+#include "SimpleRenderer2D.h"
+#include "Sprite.h"
+#include "StaticSprite.h"
+#include "BatchRenderer2D.h"
 #include <stdio.h>
-#include <GL/glew.h>
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtx/transform.hpp> // rotate, scale, translate
+#include <time.h>
+
+#define BATCH_RENDERER  1
 
 /**
  * Main program entry point
@@ -20,29 +19,35 @@ int main(void)
 	int height = 540;
 	Window window("Sparky", width, height);
 
-	Shader shader("vs.glsl", "fs.glsl");
+	Shader shader("shaders/vs.glsl", "shaders/fs.glsl");
 	shader.enable();
 
-	shader.setUniformMat4("vmmat", glm::mat4());
-	shader.setUniformMat4("vvmat", glm::mat4());
+	//shader.setUniformMat4("vmmat", glm::mat4());
+	//shader.setUniformMat4("vvmat", glm::mat4());
 	shader.setUniformMat4("vpmat", glm::ortho(0.0f, 16.0f, 0.0f, 9.0f, -1.0f, 1.0f));
 
 	shader.setUniform2f("flit", glm::vec2(4.0f, 1.5f));
 
-	Renderable2D sprite1(
-		glm::vec3(5.0f, 5.0f, 0.0f),
-		glm::vec2(4.0f, 4.0f),
-		glm::vec4(1.0f, 0.0f, 1.0f, 1.0f),
-		&shader
-	);
-	Renderable2D sprite2(
-		glm::vec3(7.0f, 1.0f, 0.0f),
-		glm::vec2(2.0f, 3.0f),
-		glm::vec4(0.2f, 0.0f, 1.0f, 1.0f),
-		&shader
-	);
+	srand(time(NULL));
+	std::vector<Renderable2D*> sprites;
 
-	Simple2DRenderer renderer;
+#if (BATCH_RENDERER == 1)
+	//Sprite sprite1(glm::vec3(5.0f, 5.0f, 0.0f), glm::vec2(4.0f, 4.0f), glm::vec4(1.0f, 0.0f, 1.0f, 1.0f));
+	//Sprite sprite2(glm::vec3(7.0f, 1.0f, 0.0f), glm::vec2(2.0f, 3.0f), glm::vec4(0.2f, 0.0f, 1.0f, 1.0f));
+	BatchRenderer2D renderer;
+
+	for (float y = 0; y < 9.0f; y += 0.1)
+		for (float x = 0; x < 16.0f; x += 0.1)
+			sprites.push_back(new Sprite(glm::vec3(x, y, 0), glm::vec2(0.04f, 0.04f), glm::vec4(rand() % 1000 / 1000.0f, 0, 1, 1)));
+#else
+	//StaticSprite sprite1(glm::vec3(5.0f, 5.0f, 0.0f), glm::vec2(4.0f, 4.0f), glm::vec4(1.0f, 0.0f, 1.0f, 1.0f), shader);
+	//StaticSprite sprite2(glm::vec3(7.0f, 1.0f, 0.0f), glm::vec2(2.0f, 3.0f), glm::vec4(0.2f, 0.0f, 1.0f, 1.0f), shader);
+	SimpleRenderer2D renderer;
+
+	for (float y = 0; y < 9.0f; y += 0.1)
+		for (float x = 0; x < 16.0f; x += 0.1)
+			sprites.push_back(new StaticSprite(glm::vec3(x, y, 0), glm::vec2(0.04f, 0.04f), glm::vec4(rand() % 1000 / 1000.0f, 0, 1, 1), shader));
+#endif
 
 	while (! window.should_close())
 	{
@@ -54,8 +59,15 @@ int main(void)
 		float flit_y = (float)(9.0f - y * 9.0f / (float)height);
 		shader.setUniform2f("flit", glm::vec2(flit_x, flit_y));
 
-		renderer.submit(&sprite1);
-		renderer.submit(&sprite2);
+#if (BATCH_RENDERER == 1)
+		renderer.begin();
+		for (unsigned int i = 0; i < sprites.size(); ++i)
+			renderer.submit(sprites[i]);
+		renderer.end();
+#else
+		for (unsigned int i = 0; i < sprites.size(); ++i)
+			renderer.submit(sprites[i]);
+#endif
 
 		renderer.flush();
 
