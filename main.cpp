@@ -19,7 +19,7 @@ int main(void)
 {
 	int width = 960;
 	int height = 540;
-	const char *texture_path = "../img/bricks.jpg";
+	const char *texture_path = "../img/wall.jpg";
 	const char *vertex_shader_path = "../shaders/vs.glsl";
 	const char *fragment_shader_path = "../shaders/fs.glsl";
 

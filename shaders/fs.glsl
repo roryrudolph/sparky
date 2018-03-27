@@ -10,6 +10,7 @@ uniform sampler2D sampler;
 in DATA
 {
     vec4 pos;
+    vec2 uv;
     vec4 col;
 } fin;
 
@@ -17,4 +18,5 @@ void main()
 {
     float intensity = 1.0 / length(fin.pos.xy - flit);
     outColor = fin.col * intensity;
+    outColor = texture(sampler, fin.uv) * intensity;
 }

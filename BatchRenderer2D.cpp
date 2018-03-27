@@ -29,6 +29,7 @@ void BatchRenderer2D::submit(const Renderable2D *renderable)
 	const glm::vec3& pos = renderable->get_position();
 	const glm::vec2& siz = renderable->get_size();
 	const glm::vec4& col = renderable->get_color();
+	const std::vector<glm::vec2>& uv = renderable->get_uv();
 
 	int r = col.r * 255.0f;
 	int g = col.g * 255.0f;
@@ -37,18 +38,22 @@ void BatchRenderer2D::submit(const Renderable2D *renderable)
 	unsigned int c = a << 24 | b << 16 | g << 8 | r;
 
 	m_buf->vertex = glm::vec3(*m_transformation_back * glm::vec4(pos, 1.0));
+	m_buf->uv = uv[0];
 	m_buf->color = c;
 	m_buf++;
 
 	m_buf->vertex = glm::vec3(*m_transformation_back * glm::vec4(pos.x, pos.y + siz.y, pos.z, 1.0f));
+	m_buf->uv = uv[1];
 	m_buf->color = c;
 	m_buf++;
 
 	m_buf->vertex = glm::vec3(*m_transformation_back * glm::vec4(pos.x + siz.x, pos.y + siz.y, pos.z, 1.0f));
+	m_buf->uv = uv[2];
 	m_buf->color = c;
 	m_buf++;
 
 	m_buf->vertex = glm::vec3(*m_transformation_back * glm::vec4(pos.x + siz.x, pos.y, pos.z, 1.0f));
+	m_buf->uv = uv[3];
 	m_buf->color = c;
 	m_buf++;
 
@@ -77,9 +82,13 @@ void BatchRenderer2D::init()
 	glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
 
 	glBufferData(GL_ARRAY_BUFFER, RENDERER_BUFFER_SIZE, NULL, GL_DYNAMIC_DRAW);
+
 	glEnableVertexAttribArray(SHADER_VERTEX_INDEX);
+	glEnableVertexAttribArray(SHADER_UV_INDEX);
 	glEnableVertexAttribArray(SHADER_COLOR_INDEX);
+
 	glVertexAttribPointer(SHADER_VERTEX_INDEX, 3, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (void *)(offsetof(VertexData, VertexData::vertex)));
+	glVertexAttribPointer(SHADER_UV_INDEX, 2, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (void *)(offsetof(VertexData, VertexData::uv)));
 	glVertexAttribPointer(SHADER_COLOR_INDEX, 4, GL_UNSIGNED_BYTE, GL_TRUE, RENDERER_VERTEX_SIZE, (void *)(offsetof(VertexData, VertexData::color)));
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
