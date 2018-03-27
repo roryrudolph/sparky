@@ -19,11 +19,16 @@ find_package (GLFW3 REQUIRED)
 include_directories(${GLFW3_INCLUDE_DIRS})
 link_libraries(${GLFW3_LIBRARIES})
 
+find_package (FreeImage REQUIRED)
+include_directories (${FREEIMAGE_INCLUDE_DIRS})
+link_libraries(${FREEIMAGE_LIBRARIES})
+
 file (GLOB SOURCES *.c *.cpp *.h)
-add_executable (${PROJECT_NAME} ${SOURCES} Layer.cpp Layer.h TileLayer.cpp TileLayer.h Group.cpp Group.h)
+add_executable (${PROJECT_NAME} ${SOURCES})
 
 target_link_libraries (${PROJECT_NAME}
     ${GLEW_LIBRARIES}
     ${OPENGL_LIBRARIES}
     ${GLFW3_LIBRARIES}
+    ${FREEIMAGE_LIBRARIES}
 )

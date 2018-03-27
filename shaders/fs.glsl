@@ -5,6 +5,8 @@ layout (location = 0) out vec4 outColor;
 uniform vec2 flit;
 uniform vec4 fcol;
 
+uniform sampler2D sampler;
+
 in DATA
 {
     vec4 pos;
