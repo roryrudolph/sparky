@@ -20,7 +20,7 @@ include_directories(${GLFW3_INCLUDE_DIRS})
 link_libraries(${GLFW3_LIBRARIES})
 
 file (GLOB SOURCES *.c *.cpp *.h)
-add_executable (${PROJECT_NAME} ${SOURCES})
+add_executable (${PROJECT_NAME} ${SOURCES} Layer.cpp Layer.h TileLayer.cpp TileLayer.h)
 
 target_link_libraries (${PROJECT_NAME}
     ${GLEW_LIBRARIES}

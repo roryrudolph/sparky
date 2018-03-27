@@ -125,5 +125,6 @@ GLuint Shader::load()
  */
 GLint Shader::getUniformLocation(const GLchar *name)
 {
-	return (glGetUniformLocation(m_id, name));
+	GLint loc = glGetUniformLocation(m_id, name);
+	return (loc);
 }
